@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How To Protect Office 365 From Phishing And Business Email Attacks</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- Basic Page Needs
+================================================== -->
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+</head>
+<body>
+
+<!-- Container starts
+================================================== -->
+<div class="container">
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div class="hero-unit">
+		<h1>How To Protect Office 365 From <br/><br/>Phishing And Business Email Attacks</h1>
+		<br/><p><em>Office 365</em> and <em>Microsoft</em> 365 environments are frequent targets for phishing attacks, spear phishing, whaling, ransomware delivery, and business email compromise because attackers know that cloud mailboxes contain sensitive conversations, invoices, credentials, and files. <em>Protecting Exchange Online requires more than one control; organizations need layered anti-phishing protection, identity security, email authentication, user training, and continuous monitoring</em>.</p><br/>
+<h2>Step #1: Enforce Multi-Factor Authentication Across All Office 365 Accounts</h2><br/>
+<h3>Apply MFA to Every User, Not Only Administrators</h3>
+<p>Start with privileged accounts such as Global Administrator, Security Administrator, Organization Management, and other <a href="https://www.ibm.com/think/topics/rbac">role-based access control (RBAC)</a> roles, but do not stop there. Attackers often target regular users first, then use compromised cloud mailboxes to launch spear phishing, internal phishing attacks, or business <strong>email compromise campaigns</strong>.</p>
+<br />
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="office-365-phishing-protection-1.jpg" alt-"Phishpr" /></p><br/>
+<p>Use Microsoft Entra Conditional Access to enforce MFA for:</p><br/>
+<ul>
+<li>Executives and finance teams</li><br/>
+<li>Help desk and IT administrators</li><br/>
+<li>Users accessing Exchange Online from unmanaged devices</li><br/>
+<li>Remote access from unfamiliar locations</li><br/>
+<li>High-risk sign-ins and risky users</li><br/>
+</ul>
+<h4>Prioritize Privileged Roles</h4>
+<p>Accounts with permissions such as Global Administrator, Security Administrator, Security Reader, Global Reader, View-Only Organization Management, and Organization Management should have stronger security settings.<em> These roles can access sensitive email &amp; collaboration data, adjust policy settings, and change core security settings across the tenant</em>.</p><br/>
+<h2>Step #2: Configure Microsoft Defender for Office 365 Anti-Phishing Policies</h2><br/>
+<p>Microsoft Defender for Office 365 provides advanced anti-phishing protection for Exchange Online. Its anti-phishing policies use machine learning, behavioral analysis, mailbox intelligence, recipient history, sender history, and impersonation signals to detect phishing attacks before they reach users.</p><br/>
+<h3>Use the Microsoft Defender Portal</h3>
+<p>In the Microsoft Defender portal, go to Email &amp; collaboration &gt; Policies &amp; rules &gt; Threat policies to configure anti-phishing policies. Review the default policy first, then create custom anti-phishing<strong> policies for high-risk users</strong>, departments, domains, Microsoft 365 Groups, Distribution Groups, and Mail-enabled security groups.</p><br/>
+<h3>Tune Policy Settings for Better Protection</h3>
+<p>When you configure anti-phishing policies, pay close attention to:</p>
+<ul>
+<li>Impersonation protection for users and domains</li><br/>
+<li>Mailbox intelligence for familiar sender patterns</li><br/>
+<li>Adjustable phishing email thresholds</li><br/>
+<li>Spoof intelligence decisions</li><br/>
+<li>The unauthenticated sender indicator</li><br/>
+<li>Actions for detected spoofed senders</li><br/>
+<li>Quarantine and user notification settings</li><br/>
+</ul>
+<h2>Step #3: Set Up SPF, DKIM, and DMARC to Stop Email Spoofing</h2><br/>
+<p><em>Email authentication is essential for stopping domain spoofing and reducing phishing attacks</em>. SPF, DKIM, and DMARC help receiving mail systems verify whether a message claiming to come from your domain is legitimate.</p><br/>
+<h3>Publish and Monitor Authentication Records</h3>
+<p>Configure:</p>
+<ul>
+<li>SPF to define which <a href="https://www.activecampaign.com/glossary/mail-server">mail servers</a> can send for your domain</li><br/>
+<li>DKIM to cryptographically sign outbound messages</li><br/>
+<li>DMARC to tell receivers what to do when SPF or DKIM fails</li><br/>
+</ul>
+<p>Exchange Online Protection and Microsoft Defender for Office 365 use these signals as part of sender reputation analysis. Proper email authentication also improves anti-phishing protection and helps<strong> identify spoofed senders</strong>.</p><br/>
+<h4><strong>Move DMARC Toward Enforcement</strong></h4>
+<p>Begin with p=none to monitor legitimate senders, then move to p=quarantine and eventually p=reject. This limits spoofing, helps stop business email compromise, and reduces the success of spear phishing campaigns that abuse your brand.</p><br/>
+<h2>Step #4: Use Safe Links and Safe Attachments to Block Malicious URLs and Files</h2><br/>
+<p>Many phishing attacks deliver ransomware through malicious links or infected attachments. Microsoft Defender for Office 365 includes security features such as Safe Links and Safe Attachments to inspect URLs and files before users interact with them.</p><br/>
+<h3>Enable Time-of-Click URL Protection</h3>
+<p><em>Safe Links rewrites and checks links when users click them, not only when the email is delivered</em>. This matters because attackers often send clean links first, then weaponize them later. Safe Links helps protect cloud mailboxes from <a href="https://www.vectra.ai/topics/credential-theft">credential theft</a>, ransomware, and phishing attacks.</p><br/>
+<h3>Detonate Suspicious Files</h3>
+<p>Safe Attachments opens files in a secure detonation environment before delivery. This reduces the risk of ransomware, malware, and weaponized documents reaching users. Apply these security features broadly, then create stricter custom policies for executives, finance, legal, and HR.</p><br/>
+<br />
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="office-365-phishing-protection-2.jpg" alt-"Phishpr" /></p><br/>
+<h2>Step #5: Protect Executives and Finance Teams From Business Email Compromise</h2><br/>
+<p>Executives and finance users face elevated risk from whaling, spear phishing, and business email compromise. Attackers often impersonate CEOs, CFOs, vendors, legal counsel, or payroll providers to request wire transfers, invoice changes, or sensitive data.</p><br/>
+<h3>Build High-Risk User Protection Policies</h3>
+<p>Use Microsoft Defender for Office 365 to define protected users and domains. Add executive names, <strong>common display-name</strong> variations, and critical external partners to impersonation protection. Enable mailbox intelligence so Microsoft Defender can compare normal communication patterns against suspicious sender behavior. Discover more by <a href="https://www.phishprotection.com/content/office-365-phishing-protection/">clicking here</a>.</p>
+
+	</div>
+	
+</div>
+</body>
+</html>
