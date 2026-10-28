@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>DKIM Record Check Guide: Verify Selectors, Public Keys, And DNS Records
+
+
+
+
+
+
+
+
+
+</title>
+<!--
+DREAM PULSE
+https://templatemo.com/tm-536-dream-pulse
+-->
+
+    <link rel="stylesheet" href="css/templatemo-dream-pulse.css" />
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">        
+          <nav id="tmSidebar" class="tm-bg-black-transparent tm-sidebar">
+            <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+            <div class="tm-sidebar-sticky">
+              <div class="tm-brand-box">
+                
+                    
+                  </div>
+                </div>
+              </div>
+
+              <ul id="tmMainNav" class="nav flex-column text-uppercase text-right tm-main-nav">
+                
+                
+             
+              <footer class="text-center text-white small">
+               
+              </footer>
+            </div>
+          </nav>
+          
+          <main role="main" class="ml-sm-auto col-12">
+            <div
+              class="parallax-window"
+              data-parallax="scroll"
+              data-image-src="img/dream-pulse-header.jpg">
+              <div class="tm-section-wrap">
+                <section id="intro" class="tm-section">
+                    <div class="tm-bg-white-transparent tm-intro">
+                      <h1><center>DKIM Record Check Guide: Verify Selectors,                                                                                                                                                                                                                         
+<br><br>Public Keys, And DNS Records<br><br>
+
+
+
+
+
+
+
+
+
+</center></h1>
+                  <p>DomainKeys Identified Mail, commonly known as DKIM, is a core email authentication standard that helps receiving systems verify whether a message was authorized by the sending domain and whether it <strong>was altered in transit</strong>. Alongside SPF and DMARC, DKIM supports domain authentication, phishing prevention, email spoofing protection, and stronger email deliverability. To discover more, <a href="https://www.duocircle.com/resources/dkim-checker">just click on the link</a>.</p>
+<br><h2>Check #1: Verify the DKIM Selector Used by Your Email Service</h2><br>
+<p><em>The DKIM selector identifies which DKIM record should be used for DKIM validation. It appears in the DKIM signature inside the email header, usually as the s= tag</em>. The signing domain appears as the d= tag. Together, these values tell the receiving mail server where to perform the DKIM lookup.</p>
+<p>For example, if an email header includes:</p>
+<p>DKIM-Signature: v=1; a=rsa-sha256; d=example.com; s=selector1;</p>
+<p>The DKIM selector is selector1, and the signing domain is example.com. The selector record is queried at:</p>
+<p>selector1._domainkey.example.com</p>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="dkim-record-check.jpg" alt=dkim-record-check-" /></p></center><br><br>
+<p>That hostname should return a DKIM record containing the public key. If the DKIM selector is incorrect, missing, expired, or not published at the correct DNS host, DKIM validation will fail even if the private key is signing messages correctly.</p>
+<p>Different hosted email service platforms use different selector formats. Google Workspace often uses a selector such as google, Microsoft 365 commonly uses selectors such as selector1 and selector2, and services like Zoho Mail, ProtonMail, Mailchimp, SendGrid, Mailgun, Amazon SES, Mailjet, SocketLabs, and Atmail each provide their own DKIM selector during setup.<em> Some providers rotate selectors automatically, while others require manual DNS management</em>.</p>
+<p>When checking the DKIM selector, inspect a real outbound email sent through the platform. Send a message to Gmail, Outlook, Yahoo Mail, or a testing mailbox, then open the <strong>full email header</strong>. Look for the DKIM signature and confirm:</p>
+<ul>
+<li>The s= value matches the DKIM selector provided by your email service.</li><br>
+<li>The d= value matches your sending domain or an authorized subdomain.</li><br>
+<li>The correct selector record exists in DNS.</li><br>
+<li>The DKIM signature aligns with your DMARC policy where required.</li><br>
+<li>The message is being signed by the expected mail server, SMTP service, or email relay.</li><br>
+</ul>
+<br><h2>Check #2: Validate the DKIM Public Key Format, Length, and Syntax</h2><br>
+<p>A DKIM record contains the public key used in <a href="https://www.cloudflare.com/learning/ssl/how-does-public-key-encryption-work/">public key cryptography</a> to verify the cryptographic signature created with the matching private key. This Key pair is the foundation of DomainKeys Identified Mail. The private key signs selected headers and body content; the public key allows receiving systems to verify message integrity without exposing the private key.</p>
+<p>A typical DKIM record published as a DNS TXT record looks like this:</p>
+<p>v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A...</p>
+<p>The most important tags include:</p>
+<ul>
+<li>v=DKIM1, which identifies the record as a DKIM record.</li><br>
+<li>k=rsa or another supported key type, depending on the provider.</li><br>
+<li>p=, which contains the public key.</li><br>
+<li><em>Optional tags such as t=s, which can restrict signing to the exact domain</em>.</li>
+</ul>
+<p>During a DKIM record check, validate the syntax carefully. The public key should not include spaces, line breaks, <strong>extra quotation marks</strong>, invalid characters, or copied labels such as “BEGIN PUBLIC KEY.” Many authentication failure issues are caused by a malformed DKIM record rather than a problem with the mail server itself.</p>
+<br><br><p><center><img style="displya: block; margin-left: auto;" src="dkim-record-check-1.jpg" alt=dkim-record-check-1-" /></p></center><br><br>
+<p>Key length matters. Modern email authentication best practice generally favors 2048-bit DKIM keys when supported. Some older DNS host interfaces historically had trouble with long TXT values, but reputable DNS management platforms such as Cloudflare, GoDaddy, Namecheap, and enterprise providers typically support split strings within a single DNS TXT record. The final resolved value must appear as one continuous DKIM record to the querying resolver.</p>
+<p>A weak or outdated public key can affect email security and <a href="https://www.activecampaign.com/blog/domain-reputation">domain reputation</a>. Short keys are less resilient, and some mailbox providers may treat weak DomainKeys Identified Mail implementations as lower trust signals. <em>For organizations using Digicert-managed services, enterprise security tools, or platforms such as Valimail, Agari, dmarcian, EasyDMARC, and DMARC Analyzer, key strength and proper key rotation should be part of a broader email policy</em>.</p>
+<p>When validating the public key, check for these common issues:</p>
+<ul>
+<li>The p= tag is empty, which can indicate a revoked DKIM record.</li><br>
+<li>The public key is truncated because of DNS <a href="https://en.wikipedia.org/wiki/TXT_record">TXT record</a> length limits.</li><br>
+<li>The public key was pasted into the <strong>wrong selector record</strong>.</li><br>
+<li>The DKIM selector in the email header points to an old public key.</li><br>
+<li>The private key used by the sending system does not match the published public key.</li><br>
+<li>The DNS record includes multiple conflicting DKIM values for the same selector.</li><br>
+</ul>                        
+                    </div>              
+                </section>
+            </div>            
+          </div>
+
+         
+  </body>
+</html>
